@@ -1,0 +1,37 @@
+Creating Service using IntentService:
+
+1. Extend the IntentService class.
+
+2. Get any data from the Activity class through Intent.
+
+3. Get a ResultReciever from the Intent.
+
+4. Pass a Bundle with data through send(int, Bundle) once the IntentService task is done. 
+
+
+  Code for IntentService:
+  
+  public class MyIntentService extends IntentService {
+
+    public MyIntentService() {
+        super("MyIntentService");
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Log.d("MyIntentService", "MyIntentService.onHandleIntent()");
+        
+        // Gets data from incoming intent
+
+        String dataString = intent.getStringExtra("Person");
+        final String resultString = dataString.concat(" Smith");
+
+        ResultReceiver receiver = intent.getParcelableExtra("receiver");
+
+        // Do some work here based on the String or any other task
+        // Call any Async tasks like DB or Download from network class
+
+        // Return back results onto the calling activity that has a callback handler
+        // Send any Bundle if needed through send(int, Bundle).
+        receiver.send(0, null);
+    }
