@@ -1,0 +1,44 @@
+ExecutorService and Futures and Callable Task helps creates tasks that can be completely
+Asynchronously by a Thread pool.
+
+1. Create an ExecutorService class as a Singleton.
+
+2. Initialize with a threadpool.
+
+3. Submit a callable in a function.
+
+Code to create an ExecutorService to Download from the Network :
+(Can also be used to read from the Database)
+
+public class MoviesExecutor {
+
+    private static MoviesExecutor myExecutor;
+    private static final int POOL_SIZE = 5;
+
+    public final ExecutorService service;
+    private final int poolSize;
+
+    private MoviesExecutor(int poolSize) {
+        this.poolSize = poolSize;
+        service = Executors.newFixedThreadPool(this.poolSize);
+    }
+
+    // Needs to be called from Class itself
+    public synchronized static MoviesExecutor getInstance() {
+        if (myExecutor == null) {
+            myExecutor = new MoviesExecutor(POOL_SIZE);
+        }
+        return myExecutor;
+    }
+
+    public Future<List<Movie>> getMoviesByYear(final String year) {
+        return service.submit(new Callable<List<Movie>>() {
+                                  @Override
+                                  public List<Movie> call() throws Exception {
+                                      return NetworkUtil.getMoviesByYear(year);
+                                  }
+                              });
+        // Use a special Callable Task class
+        // return service.submit(new MyCallableMovies(year));
+    }
+}
