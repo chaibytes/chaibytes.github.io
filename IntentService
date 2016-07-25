@@ -26,7 +26,8 @@ Creating Service using IntentService:
         String dataString = intent.getStringExtra("Person");
         final String resultString = dataString.concat(" Smith");
 
-        ResultReceiver receiver = intent.getParcelableExtra("receiver");
+        // ApplicationVariables class contains globals and other utils methods
+        ResultReceiver receiver = intent.getParcelableExtra(ApplicationVariables.RESULT_RECEIVER);
 
         // Do some work here based on the String or any other task
         // Call any Async tasks like DB or Download from network class
