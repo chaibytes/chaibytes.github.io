@@ -1,1 +1,5 @@
+Calling an IntentService from an Activity:
 
+1. Create an Intent to call the IntentService class.
+
+2. 
