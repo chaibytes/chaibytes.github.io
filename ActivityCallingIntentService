@@ -2,4 +2,28 @@ Calling an IntentService from an Activity:
 
 1. Create an Intent to call the IntentService class.
 
-2. 
+2. Put the ResultReceiver instance and override the onReceiveResult method
+
+3. Perform any task based on the data received in the onReceiveResult method's resultCode and resultData
+
+
+Open an Intent on Activity Button click:
+
+Button mybtn = (Button) findViewById(R.id.button_start_service);
+        mybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntentService = new Intent(ServiceActivity.this, MyIntentService.class);
+                myIntentService.putExtra("Person", "Daniel");
+                
+                // Uses ResultReceiver
+                myIntentService.putExtra(ApplicationVariables.RESULT_RECEIVER, new ResultReceiver(mHandler) {
+                    @Override
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        Toast.makeText(getApplicationContext(), "onReceiveResult() method", Toast.LENGTH_LONG).show();
+                        super.onReceiveResult(resultCode, resultData);
+                    }
+                });
+                startService(myIntentService);
+            }
+        });
