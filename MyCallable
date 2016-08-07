@@ -1,0 +1,11 @@
+public class MyCallableMovies implements Callable<List<Movie>> {
+    private final String year;
+
+    public MyCallableMovies(String year) {
+        this.year = year;
+    }
+    @Override
+    public List<Movie> call() throws Exception {
+        return NetworkUtil.getMoviesByYear(year);
+    }
+}
