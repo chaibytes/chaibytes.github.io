@@ -1,0 +1,8 @@
+// setIndeterminate = true
+
+ProgressBar progressBar = new ProgressBar(MyGridView.this);
+progressBar.setIndeterminate(true);
+progressBar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.MATCH_PARENT));
+GridView gridView = (GridView) findViewById(R.id.gridView);
+gridView.setEmptyView(progressBar);
