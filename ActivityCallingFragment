@@ -19,5 +19,4 @@ public class PostLoginScreenActivity extends Activity implements ExampleFragment
 
       // Call another function or do some other task based on the data recieved from the fragment
       testFunction(text);
-
   }
