@@ -21,8 +21,8 @@
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                moviesAdapter2.filter(newText.toString().trim());
-                listView.invalidate();
+                moviesAdapter2.filter(newText.toString().trim()); // notifydatachanged() is called in this method
+                listView.invalidate(); // invalidate the view as its being reconstructed
                 return true;
 
             }
