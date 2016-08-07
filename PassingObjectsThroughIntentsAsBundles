@@ -1,0 +1,15 @@
+In Initial Activity (Sending Activity)
+
+Intent activity = new Intent(MyActivity.this,NextActivity.class);
+activity.putExtra("myObject", new Gson().toJson(myobject));
+startActivity(activity);
+
+
+In Next Activity (Receiving Activity)
+
+String jsonMyObject;
+Bundle extras = getIntent().getExtras();
+if (extras != null) {
+   jsonMyObject = extras.getString("myObject");
+}
+MyObject myObject = new Gson().fromJson(jsonMyObject, MyObject.class);
