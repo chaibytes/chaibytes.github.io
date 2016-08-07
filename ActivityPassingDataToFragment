@@ -20,6 +20,13 @@ private class ButtonOnClickListener implements View.OnClickListener {
          newfragment.setArguments(args);
          FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
          // Replace will clean up the space instead of over writing
+         // Here main_frag is a framelayout to hold the fragment
+         //    <FrameLayout
+         //      android:layout_width="wrap_content"
+         //      android:layout_height="wrap_content"
+         //      android:id="@+id/main_frag"
+         //      android:layout_below="@id/getMoviesByYearBtnbutton" />
+         
          fragmentTransaction.replace(R.id.main_frag, newfragment);
          fragmentTransaction.commit();
      }
