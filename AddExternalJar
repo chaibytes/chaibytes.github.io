@@ -1,0 +1,19 @@
+Try one of the following ways:
+
+1. In order to add library click on File menu from Android Studio and select Project Structure.
+2. Then from the pop up menu select Dependencies tab add Library Dependency.
+3. And then click on “+” and choose you Gson library.
+4. After that click on OK and close the tab. Now you can start using Gson library in your project.
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.4'
+}
+
+Download & Copy Your .jar file in libs folder then adding one line to build.gradle:
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar']) ----> AS creates this
+    compile 'com.google.code.gson:gson:2.3.4'   ----------> I added this one
+}
+Do not forget to click "Sync now"
+
