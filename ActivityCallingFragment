@@ -1,0 +1,23 @@
+Activity Code calling a Fragment:
+
+// Implments the Fragment's Interface
+public class PostLoginScreenActivity extends Activity implements ExampleFragment.OnFragmentInteractionListener {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.frame_layout);
+        if (fragment == null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.frame_layout, new ExampleFragment());
+            fragmentTransaction.commit();
+        }
+        
+  // Has access to the interface method
+  @Override
+  public void onFragmentInteraction(String text) {
+      //Toast.makeText(this, "PostLoginScreenActivity.onFragmentInteraction()", Toast.LENGTH_LONG).show();
+      //Toast.makeText(this, "Hello " + text + " !. Welcome.", Toast.LENGTH_LONG).show();
+
+      // Call another function or do some other task based on the data recieved from the fragment
+      testFunction(text);
+
+  }
