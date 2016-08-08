@@ -1,0 +1,15 @@
+// This Activity opens on receiving notification
+// Also we need to cancel the notification when this activity is created
+
+public class ResultActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_result);
+
+        final String notificationID = "notificationID";
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.cancel(getIntent().getIntExtra(notificationID, -1));
+    }
+}
