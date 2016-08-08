@@ -1,0 +1,56 @@
+Handlers
+// On the UI Thread:
+public static Handler mHandler = new Handler() {
+    @Override
+    public void handleMessage(Message msg) {
+        Log.d("ServiceActivity", String.format("Handler.handleMessage(): msg=%s", msg));
+        //super.handleMessage(msg);
+        tv.setText("Message Recieved : " + Integer.toString(msg.what));
+    }
+};
+
+
+
+----------------------------------------------------------------------------------------------
+Loopers
+class LooperThread extends Thread {
+      public Handler mHandler;
+
+      public void run() {
+          Looper.prepare();
+
+          mHandler = new Handler() {
+              public void handleMessage(Message msg) {
+                  // process incoming messages here
+              }
+          };
+
+          Looper.loop();
+      }
+  }
+
+Note: getMainLooper() - Returns the application's main looper, which lives in the main thread of the application.
+
+----------------------------------------------------------------------------------------------
+Message
+// From a Thread:
+public void run() {
+  Message msg = Message.obtain();
+  msg.what = 999;
+  ServiceActivity.mHandler.sendMessage(msg);
+  try {
+      Thread.sleep(100);
+  } catch (InterruptedException e) {
+      // Thread.currentThread().interrupt();
+      e.printStackTrace();
+  }
+}
+
+// Post a message onto the main thread:
+  Handler mHandler = new Handler(getMainLooper());
+  mHandler.post(new Runnable() {
+      @Override
+      public void run() {
+          Toast.makeText(getApplicationContext(), resultString, Toast.LENGTH_LONG).show();
+      }
+  });
