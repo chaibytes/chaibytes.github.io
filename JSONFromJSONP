@@ -1,0 +1,52 @@
+public static List<Company> getCompanyList() throws IOException{
+  String url = "http://gomashup.com/json.php?fds=finance/fortune500/year/2008";
+  String response = downloadUrl(url);
+  
+  String validResponse = response.substring(response.indexOf("(") + 1, response.lastIndexOf(")"));
+  String str = validResponse.substring(validResponse.indexOf("["), validResponse.lastIndexOf("}"));
+
+  str.replaceAll("\r?\n", "");
+
+  Type type = new TypeToken<List<Company>>(){}.getType();
+  return gson.fromJson(str, type);
+}
+
+Note: JSON format:
+[{"Id":"173e735a","ImdbId":"tt0298606","OriginalTitle":"Yeh Teraa Ghar Yeh Meraa Ghar",
+"Title":"Yeh Teraa Ghar Yeh Meraa Ghar",
+"TrailerLink":"","TrailerEmbedCode":"","Country":"IN","Region":"BOLLYWOOD",
+"Genre":"Drama","RatingCount":12,"Rating":2.9,"CensorRating":"U/A",
+"ReleaseDate":"10/12/2001","Runtime":159,"Budget":0,"Revenue":0,
+"PosterPath":"https://s3-ap-southeast-1.amazonaws.com/cinemalytics/movie/06B35767282E61D0754F9BA8825966D5.jpg"}
+,{"Id":"d68215ae","ImdbId":"tt0292740","OriginalTitle":"Yeh Raaste Hain Pyaar Ke","Title":"Yeh Raaste Hain Pyaar Ke",
+"TrailerLink":"","TrailerEmbedCode":"","Country":"IN","Region":"BOLLYWOOD","Genre":"Romance","RatingCount":9,
+"Rating":2.05,"CensorRating":"U/A","ReleaseDate":"8/10/2001","Runtime":0,"Budget":0,"Revenue":0,
+"PosterPath":"https://s3-ap-southeast-1.amazonaws.com/cinemalytics/movie/9BBDCB05144DF0BA62D70F3764D837C1.jpg"}]
+
+
+JSONP format:
+({
+	"result":[
+	{
+		"Year" : "2008",
+		"Rank" : "1",
+		"Revenue" : "378",
+		"Profit" : "799.00",
+		"Company" : "Wal-Mart Stores"
+	},
+	{
+		"Year" : "2008",
+		"Rank" : "2",
+		"Revenue" : "372",
+		"Profit" : "824.00",
+		"Company" : "Exxon Mobil"
+	},
+	{
+		"Year" : "2008",
+		"Rank" : "3",
+		"Revenue" : "210",
+		"Profit" : "783.00",
+		"Company" : "Chevron"
+	}
+  ]
+})
