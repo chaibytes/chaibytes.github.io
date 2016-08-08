@@ -1,0 +1,18 @@
+public class ResponseReceiver extends BroadcastReceiver {
+
+  public static final String ACTION_RESP = "com.chaibytes.androidapplicationjune11.someAction";
+
+  public ResponseReceiver() {
+    // Constructor
+  }
+
+  @Override
+  public void onReceive(Context context, Intent intent) {
+      Log.d("ResponseReceiver", "ResponseReceiver.onReceive()");
+      
+      // Handle Intent here by decoding any messages or just calling another
+      // method etc.
+      String name = intent.getExtras().getString("Person");
+      Toast.makeText(context, name, Toast.LENGTH_LONG).show();
+  }
+}
