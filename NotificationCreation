@@ -1,0 +1,19 @@
+// Create a new Notification
+NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+        .setContentText("My Notification")
+        .setSmallIcon(R.drawable.demo_notification_icon)
+        .setContentText("Hello World !");
+// ResultActivity is called on clicking on the Notification
+Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
+PendingIntent resultingPendingIntent = PendingIntent.getActivity(
+        getApplicationContext(),
+        0,
+        resultIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT
+);
+
+builder.setContentIntent(resultingPendingIntent);
+int notificationID = 001;
+NotificationManager notifyMgr =
+        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+notifyMgr.notify(notificationID, builder.build());
