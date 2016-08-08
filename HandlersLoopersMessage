@@ -9,6 +9,30 @@ public static Handler mHandler = new Handler() {
     }
 };
 
+----------------------------------------------------------------------------------------------
+
+// HandlerThread, Handler, Looper:
+
+// From the main UI or another thread
+HandlerThread myThread = new HandlerThread("Worker Thread");  
+myThread.start(); 
+
+Looper mLooper = myThread.getLooper(); 
+MyHandler mHandler = new MyHandler(mLooper); 
+
+// For sending a message
+Message msg = mHandler.obtainMessage(); 
+msg.obj =  "hello other thread"; // Some Arbitrary object
+mHandler.sendMessage(msg); 
+
+// Declare a Handler class
+class MyHandler extends Handler { 
+    public MyHandler(Looper myLooper) { 
+        super(myLooper);
+    }
+    public void handleMessage(Message msg) { 
+    }
+}
 
 
 ----------------------------------------------------------------------------------------------
