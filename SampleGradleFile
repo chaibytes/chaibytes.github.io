@@ -1,0 +1,68 @@
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.chaibytes.bollytime"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+}
+
+=================================================================================================
+
+// Using Picasso:
+  Picasso.with(context).load(url).into(holder.imageView); // Use of Picasso for Images
+  
+// Using Gson:
+private static final Gson gson = new Gson();
+
+String url = "https://api.cinemalytics.com/v1/movie/year/" + year +
+        "/?auth_token=C921EC5E129E43820A1E4B3F277CAE84";
+
+String response = downloadUrl(url);
+//Log.d("NetworkUtil", response);
+Type type = new TypeToken<List<Movie>>(){}.getType();
+return gson.fromJson(response, type);
+
+
+// To and from Gson:
+
+public class MainTest {
+  public static void main(String[] args) {
+          List<Task> list = new ArrayList<Task>();
+          for (int i = 0; i < 20; i++) {
+                  list.add(new Task(i, "Test1", "Test2", Task.Status.ASSIGNED, 10));
+          }
+          Gson gson = new Gson();
+          Type type = new TypeToken<List<Task>>() {}.getType();
+          String json = gson.toJson(list, type);
+          System.out.println(json);
+          List<Task> fromJson = gson.fromJson(json, type);
+
+          for (Task task : fromJson) {
+                  System.out.println(task);
+          }
+  }
+}
