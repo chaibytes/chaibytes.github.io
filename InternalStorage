@@ -1,0 +1,44 @@
+To create and write a private file to the internal storage:
+
+1. Call openFileOutput() with the name of the file and the operating mode. This returns a FileOutputStream.
+2. Write to the file with write().
+3. Close the stream with close().
+
+For example:
+
+String FILENAME = "hello_file";
+String string = "hello world!";
+
+FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+fos.write(string.getBytes());
+fos.close();
+
+To read a file from internal storage:
+
+1. Call openFileInput() and pass it the name of the file to read. This returns a FileInputStream.
+2. Read bytes from the file with read().
+3. Then close the stream with close().
+
+FileInputStream fin = openFileInput(file);
+int c;
+String temp="";
+while( (c = fin.read()) != -1){
+   temp = temp + Character.toString((char)c);
+}
+//string temp contains all the data of the file.
+fin.close();
+
+Other useful methods:
+
+getFilesDir()
+Gets the absolute path to the filesystem directory where your internal files are saved.
+
+getDir()
+Creates (or opens an existing) directory within your internal storage space.
+
+deleteFile()
+Deletes a file saved on the internal storage.
+
+fileList()
+Returns an array of files currently saved by your application.
+
