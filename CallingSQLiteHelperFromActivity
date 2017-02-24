@@ -1,5 +1,0 @@
-// Store and Retrieve Movies to a SQLLite databases
-MoviesDatabaseHelper helper = new MoviesDatabaseHelper(getApplicationContext());
-helper.addMovie();
-List<String> strArr = helper.getMovie();
-Toast.makeText(getApplicationContext(), strArr.get(1), Toast.LENGTH_LONG).show();
